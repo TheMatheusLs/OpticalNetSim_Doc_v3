@@ -1,4 +1,4 @@
-package Routing;
+package RSA.Routing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import Config.ParametersSimulation;
 import Manager.FolderManager;
 import Network.TopologyManager;
-import Routing.Algorithms.Dijkstra;
-import Routing.Algorithms.YEN;
+import RSA.Routing.Algorithms.Dijkstra;
+import RSA.Routing.Algorithms.YEN;
 import Types.GeneralTypes.RoutingAlgorithmType;
 
 public class RoutesManager {
@@ -58,7 +58,7 @@ public class RoutesManager {
         }
 
         // Imprime na tela as rotas
-        System.out.println(this);
+        //System.out.println(this);
     }
 
     /**

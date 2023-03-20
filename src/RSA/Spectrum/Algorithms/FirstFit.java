@@ -1,11 +1,11 @@
-package Spectrum.Algorithms;
+package RSA.Spectrum.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import Config.ParametersSimulation;
 import Network.Structure.OpticalLink;
-import Routing.Route;
+import RSA.Routing.Route;
 
 public class FirstFit extends SpectrumAlgorithm{
     

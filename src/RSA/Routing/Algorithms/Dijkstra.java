@@ -1,4 +1,4 @@
-package Routing.Algorithms;
+package RSA.Routing.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import Network.TopologyManager;
 import Network.Structure.OpticalLink;
-import Routing.Route;
+import RSA.Routing.Route;
 
 public class Dijkstra extends RoutingAlgorithm{
 

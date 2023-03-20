@@ -5,10 +5,10 @@ import java.util.List;
 
 import CallRequests.CallRequest;
 import Config.ParametersSimulation;
-import Routing.Route;
-import Routing.RoutesManager;
-import Spectrum.Algorithms.FirstFit;
-import Spectrum.Algorithms.SpectrumAlgorithm;
+import RSA.Routing.Route;
+import RSA.Routing.RoutesManager;
+import RSA.Spectrum.Algorithms.FirstFit;
+import RSA.Spectrum.Algorithms.SpectrumAlgorithm;
 import Types.GeneralTypes.KSortedRoutesByType;
 import Types.GeneralTypes.RSAOrderType;
 import Types.GeneralTypes.RoutingAlgorithmType;

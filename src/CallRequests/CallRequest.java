@@ -10,7 +10,7 @@ import GeneralClasses.AuxiliaryFunctions;
 import GeneralClasses.ProbabilityFunctions;
 import Network.Structure.OpticalLink;
 import Network.Structure.OpticalSwitch;
-import Routing.Route;
+import RSA.Routing.Route;
 import Types.GeneralTypes.CallRequestType;
 
 /**

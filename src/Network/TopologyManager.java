@@ -38,7 +38,7 @@ public class TopologyManager {
         this.inicialize();
 
         // Imprime na tela a topologia usada
-        System.out.println(this);
+        //System.out.println(this);
     }
 
     /**

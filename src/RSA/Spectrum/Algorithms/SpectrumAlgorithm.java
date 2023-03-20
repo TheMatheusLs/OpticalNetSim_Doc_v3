@@ -1,8 +1,8 @@
-package Spectrum.Algorithms;
+package RSA.Spectrum.Algorithms;
 
 import java.util.List;
 
-import Routing.Route;
+import RSA.Routing.Route;
 
 public class SpectrumAlgorithm {
     
