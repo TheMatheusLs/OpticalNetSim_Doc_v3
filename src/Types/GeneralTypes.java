@@ -23,6 +23,7 @@ public class GeneralTypes {
 
     public enum SpectralAllocationAlgorithmType{
         FirstFit,
+        MSCL,
         Random;
     }
 
@@ -68,6 +69,6 @@ public class GeneralTypes {
     public enum RSAOrderType{
         Routing_SA,
         SA_Routing,
-        Disable;
+        None;
     }
 }

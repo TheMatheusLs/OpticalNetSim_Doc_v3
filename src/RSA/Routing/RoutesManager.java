@@ -6,9 +6,11 @@ import java.util.List;
 import Config.ParametersSimulation;
 import Manager.FolderManager;
 import Network.TopologyManager;
+import Network.Structure.OpticalLink;
 import RSA.Routing.Algorithms.Dijkstra;
 import RSA.Routing.Algorithms.YEN;
 import Types.GeneralTypes.RoutingAlgorithmType;
+import Types.GeneralTypes.SpectralAllocationAlgorithmType;
 
 public class RoutesManager {
 
@@ -57,9 +59,65 @@ public class RoutesManager {
             this.RoutingByYEN();
         }
 
+        // Se o algoritmo precisa do junto de rotas interferentes, constroe o conjuto de rotas interferentes
+        if (ParametersSimulation.getSpectralAllocationAlgorithmType() == SpectralAllocationAlgorithmType.MSCL){
+            this.generateAllConflictRoutes();
+        }
+
         // Imprime na tela as rotas
         //System.out.println(this);
     }
+
+    private void generateAllConflictRoutes(){
+        System.out.print("Criando a lista de rotas conflitantes...");
+
+        for (List<Route> routesOD : this.allRoutes){
+            for (Route mainRoutes : routesOD){
+                if (mainRoutes == null){
+                    continue;
+                }
+
+                List<Route> conflictRoutes = new ArrayList<Route>();
+                int currentRouteID = mainRoutes.hashCode();
+
+                //Se pelo menos um link for compartilhado pelas rotas há um conflito
+                for (OpticalLink mainOpticalLink: mainRoutes.getUpLink()){
+                    
+                    // Percorre todas as Rotas
+                    for (List<Route> routesODAux : this.allRoutes){
+
+                        for (Route mainRoutesAux : routesODAux){
+
+                            if (mainRoutesAux == null){
+                                continue;
+                            }
+
+                            BREAK_LINK:for (OpticalLink linkAux: mainRoutesAux.getUpLink()){
+
+                                if ((currentRouteID != mainRoutesAux.hashCode()) && (mainOpticalLink == linkAux)){
+
+                                    for (Route routeAuxCon : conflictRoutes){
+                                        if (routeAuxCon == mainRoutesAux){
+                                            continue BREAK_LINK;
+                                        }
+                                    }
+
+                                    conflictRoutes.add(mainRoutesAux);
+
+                                    break BREAK_LINK;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                mainRoutes.setConflitList(conflictRoutes);
+            }
+        }
+
+        System.out.println(" Finalizado.");
+    }
+
 
     /**
      * Método para criar a estrutura para armazenar todas as rotas separadas entre os pares origem destino 

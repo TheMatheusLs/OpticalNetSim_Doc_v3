@@ -71,7 +71,7 @@ public class RSAManager {
      */
     public void findRouteAndSlots(int source, int destination, CallRequest callRequest) throws Exception {
         
-        if (this.rsaOrderType == RSAOrderType.Disable){
+        if (this.rsaOrderType == RSAOrderType.None){
             
         }
 

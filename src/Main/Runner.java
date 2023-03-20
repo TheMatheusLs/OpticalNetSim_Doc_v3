@@ -1,5 +1,6 @@
 package Main;
 
+import GeneralClasses.AuxiliaryFunctions;
 import Manager.FolderManager;
 
 public class Runner {
@@ -11,8 +12,10 @@ public class Runner {
 
         //Importa as configurações do simulador: TODO implement
 
-        //Importa as configurações da simulação: TODO implement
-        // TODO: Verificar se não hå nenhum conflito de configuração
+        //Importa as configurações da simulação
+        if (!AuxiliaryFunctions.isParametersSimulationOK()){
+            throw new Exception("Os parâmetros de simulação não estão corretos! Revise antes de iniciar uma nova simulação!");
+        }
 
         // Cria a pasta para armazenar os resultados e as configurações da simulação
         FolderManager folderManager = new FolderManager("Testes");

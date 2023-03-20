@@ -4,6 +4,9 @@ import Config.ConfigSimulator;
 import Config.ParametersSimulation;
 import Network.Structure.OpticalSwitch;
 import Types.ModulationLevelType;
+import Types.GeneralTypes.RSAOrderType;
+import Types.GeneralTypes.RoutingAlgorithmType;
+import Types.GeneralTypes.SpectralAllocationAlgorithmType;
 
 public class AuxiliaryFunctions {
     
@@ -44,5 +47,46 @@ public class AuxiliaryFunctions {
         }
 
         return optSwi;
+    }
+
+    public static boolean isParametersSimulationOK() {
+
+        final RoutingAlgorithmType routingAlgorithmType = ParametersSimulation.getRoutingAlgorithmType();
+        final SpectralAllocationAlgorithmType spectralAllocationAlgorithmType = ParametersSimulation.getSpectralAllocationAlgorithmType();
+        final RSAOrderType rsaOrderType = ParametersSimulation.getRSAOrderType();
+
+        if ((routingAlgorithmType == RoutingAlgorithmType.YEN) &&
+            (spectralAllocationAlgorithmType == SpectralAllocationAlgorithmType.FirstFit) &&
+            (rsaOrderType == RSAOrderType.Routing_SA)){
+            return true;
+        }
+        if ((routingAlgorithmType == RoutingAlgorithmType.YEN) &&
+            (spectralAllocationAlgorithmType == SpectralAllocationAlgorithmType.FirstFit) &&
+            (rsaOrderType == RSAOrderType.SA_Routing)){
+            return true;
+        }
+        if ((routingAlgorithmType == RoutingAlgorithmType.Dijstra) &&
+            (spectralAllocationAlgorithmType == SpectralAllocationAlgorithmType.FirstFit) &&
+            (rsaOrderType == RSAOrderType.Routing_SA)){
+            return true;
+        }
+        if ((routingAlgorithmType == RoutingAlgorithmType.Dijstra) &&
+            (spectralAllocationAlgorithmType == SpectralAllocationAlgorithmType.FirstFit) &&
+            (rsaOrderType == RSAOrderType.SA_Routing)){
+            return true;
+        }
+        if ((routingAlgorithmType == RoutingAlgorithmType.MSCLSequencial) &&
+            (spectralAllocationAlgorithmType == SpectralAllocationAlgorithmType.MSCL) &&
+            (rsaOrderType == RSAOrderType.None)){
+            return true;
+        }
+        if ((routingAlgorithmType == RoutingAlgorithmType.MSCLCombinado) &&
+            (spectralAllocationAlgorithmType == SpectralAllocationAlgorithmType.MSCL) &&
+            (rsaOrderType == RSAOrderType.None)){
+            return true;
+        }
+
+
+        return false;
     }
 }

@@ -104,6 +104,10 @@ public class Route {
         this.kFindIndex = -1;
     }
 
+    public void setConflitList(List<Route> conflictRoutes){
+		this.allConflictRoutes = conflictRoutes;
+	}
+
     /**
      * Configura o índice k encontrado pelo YEN
      * 

@@ -33,6 +33,10 @@ public class ParametersSimulation{
     final static int maxNumberOfBlockedRequests = 1000;
     
     // Algoritmo de Roteamento
+    /**
+    * Se for escolhido o algoritmo YEN ou Dijkstra é necessário escolher o tipo de ordem RSA entre "Routing_SA" ou "SA_Routing". Modificar a variável "rsaOrderType". E o algoritmo de alocação do espectro deve ser o "First-Fit" 
+    * Se for escolhido o algoritmo "MSCLSequencial" ou "MSCLCombinado" o algoritmo de alocação do espectro deve ser o "MSLC" e o tipo de ordem deve ser atribuido "None".
+    */
     final static RoutingAlgorithmType routingAlgorithmType = RoutingAlgorithmType.YEN;
     final static int kShortestRoutes = 2;
     final static KSortedRoutesByType kSortedRoutesByType = KSortedRoutesByType.None;
@@ -147,23 +151,23 @@ public class ParametersSimulation{
     }
 
     public static KSortedRoutesByType getKSortedRoutesByType() {
-        return kSortedRoutesByType; //TODO: Colocar no to string
+        return kSortedRoutesByType;
     }
 
     public static ModulationLevelType[] getMudulationLevelType() {
-        return mudulationLevelType; //TODO: Colocar no to string
+        return mudulationLevelType;
     }
 
     public static PhysicalLayerOption getPhysicalLayerOption() {
-        return physicalLayerOption; //TODO: Colocar no to string
+        return physicalLayerOption;
     }
 
     public static StopCriteriaType getStopCriteriaType() {
-        return stopCriteria; //TODO: Colocar no to string
+        return stopCriteria;
     }
 
     public static RSAOrderType getRSAOrderType() {
-        return rsaOrderType; //TODO: Colocar no to string
+        return rsaOrderType; 
     }
 
     public static String save() {
