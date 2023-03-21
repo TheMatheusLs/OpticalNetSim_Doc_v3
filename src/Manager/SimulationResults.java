@@ -124,10 +124,10 @@ public class SimulationResults {
     }
 
     public static String csvHeader(){
-        return "nSim,networkLoad,probabilityBlocking,executionTime,MSCLCycle,currentRandomSeed,numBlockBySlots,numBlockByQoT\n";
+        return "nSim;networkLoad;probabilityBlocking;executionTime;MSCLCycle;currentRandomSeed;numBlockBySlots;numBlockByQoT\n";
     }
 
     public String csvToSave() {
-        return "" +nSim +","+ networkLoad +","+ probabilityBlocking +","+ executionTime +","+ MSCLCycle +","+ currentRandomSeed +","+ numBlockBySlots +","+ numBlockByQoT+ "\n";
+        return "" +nSim +";"+ networkLoad +";"+ probabilityBlocking +";"+ executionTime +";"+ MSCLCycle +";"+ currentRandomSeed +";"+ numBlockBySlots +";"+ numBlockByQoT+ "\n";
     }
 }

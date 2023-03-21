@@ -37,8 +37,8 @@ public class ParametersSimulation{
     * Se for escolhido o algoritmo YEN ou Dijkstra é necessário escolher o tipo de ordem RSA entre "Routing_SA" ou "SA_Routing". Modificar a variável "rsaOrderType". E o algoritmo de alocação do espectro deve ser o "First-Fit" 
     * Se for escolhido o algoritmo "MSCLSequencial" ou "MSCLCombinado" o algoritmo de alocação do espectro deve ser o "MSLC" e o tipo de ordem deve ser atribuido "None".
     */
-    final static RoutingAlgorithmType routingAlgorithmType = RoutingAlgorithmType.MSCLSequencial;
-    final static int kShortestRoutes = 1;
+    final static RoutingAlgorithmType routingAlgorithmType = RoutingAlgorithmType.MSCLCombinado;
+    final static int kShortestRoutes = 2;
     final static KSortedRoutesByType kSortedRoutesByType = KSortedRoutesByType.None;
 
     
