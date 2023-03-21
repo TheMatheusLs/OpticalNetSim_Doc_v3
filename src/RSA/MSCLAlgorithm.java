@@ -21,10 +21,15 @@ public class MSCLAlgorithm {
      * Armazena o valor do ciclo MSCL
      */
     private long cyclesMSCL;
+    /**
+     * Armazena o slots encontrado para cada rota
+     */
+    List<List<Integer>> slotsMSCL;
 
     public MSCLAlgorithm(){
         this.route = null;
         this.fSlots = new ArrayList<Integer>();
+        this.slotsMSCL = new ArrayList<List<Integer>>();
         this.cyclesMSCL = 0;
     }
 
@@ -42,6 +47,7 @@ public class MSCLAlgorithm {
 
             if (valuesLostCapacity < (Double.MAX_VALUE * 0.7)){
                 this.route = routeSolution.get(bestIndexMSCL);
+                this.fSlots = this.slotsMSCL.get(bestIndexMSCL);
 
                 // Calcula o tamanho da requisição
                 int reqNumbOfSlots = this.route.getReqSize(callRequest.getSelectedBitRate());
@@ -59,7 +65,53 @@ public class MSCLAlgorithm {
         return false;
     }
 
-    public void findMSCLCombinado(List<Route> routeSolution, CallRequest callRequest) {
+    public boolean findMSCLCombinado(List<Route> routeSolution, CallRequest callRequest) throws Exception {
+
+        List<Double> valuesLostCapacity = new ArrayList<Double>();
+        int bestIndexMSCL = 0;
+        int selectKRouteID = -1;
+
+        for (Route currentRoute : routeSolution){
+
+            if (currentRoute != null){
+                valuesLostCapacity.add(getRouteMSCLCost(currentRoute, callRequest));
+            } else {
+                valuesLostCapacity.add(Double.MAX_VALUE * 0.9);
+            }
+        }
+
+        double minValue = Double.MAX_VALUE * 0.7;
+
+        for (int index = 0; index < routeSolution.size(); index++){
+
+            if (minValue > valuesLostCapacity.get(index)){ // Se for igual, escolher a menor rota
+
+                minValue = valuesLostCapacity.get(index);
+                bestIndexMSCL = index;
+                selectKRouteID = routeSolution.get(bestIndexMSCL).getkFindIndex();
+
+            } else {
+
+                if ((minValue == valuesLostCapacity.get(index)) && selectKRouteID > routeSolution.get(index).getkFindIndex()) { // Se for igual, escolher a menor rota
+                    
+                    minValue = valuesLostCapacity.get(index);
+                    bestIndexMSCL = index;
+                    selectKRouteID = routeSolution.get(bestIndexMSCL).getkFindIndex();
+                }
+            }
+        }
+
+        if (minValue < Double.MAX_VALUE * 0.5){
+            this.route = routeSolution.get(bestIndexMSCL);
+            this.fSlots = this.slotsMSCL.get(bestIndexMSCL);
+
+            // Calcula o tamanho da requisição
+            int reqNumbOfSlots = this.route.getReqSize(callRequest.getSelectedBitRate());
+            callRequest.setReqNumbOfSlots(reqNumbOfSlots);
+            return true;
+        }
+
+        return false;
     }
 
     private double getRouteMSCLCost(Route currentRoute, CallRequest callRequest) throws Exception{
@@ -84,6 +136,8 @@ public class MSCLAlgorithm {
         }
 
         if (!isPossibleToAlocateReq){
+
+            this.slotsMSCL.add(new ArrayList<Integer>());
 
             //Se FS não exite então Retorna um valor alto
             return Double.MAX_VALUE * 0.8; //Divide por 2 para evitar bugs do desempate
@@ -256,7 +310,7 @@ public class MSCLAlgorithm {
             slotsReq.add(s);
         }
 
-        this.fSlots = slotsReq;
+        this.slotsMSCL.add(slotsReq);
 
         return bestLostCapacity;
     }

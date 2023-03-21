@@ -15,7 +15,6 @@ import RSA.RSAManager;
 import RSA.Routing.Route;
 import RSA.Routing.RoutesManager;
 import Types.GeneralTypes.CallRequestType;
-import Types.GeneralTypes.KSortedRoutesByType;
 import Types.GeneralTypes.RandomGenerationType;
 import Types.GeneralTypes.StopCriteriaType;
 
@@ -150,6 +149,7 @@ public class Simulation {
 
                 // Executa uma simulação e retorna a classe de resultados
                 simulationResults = this.runSingleLoad(networkLoad, simulationResults);
+                simulationResults.setnSim(nSim);
 
                 // Escreve na tela os resultados
                 System.out.println(simulationResults);
@@ -184,6 +184,8 @@ public class Simulation {
 		int numBlockByQoT = 0;
         long limitCallRequest = 0; 
 
+        long cyclesMSCL = 0;
+
         final CallRequestManager listOfCalls = new CallRequestManager();
 
         // Loop para cada requisição simulada
@@ -199,7 +201,7 @@ public class Simulation {
             hasQoT = false;
 
             do{ 
-                source = (int) Math.floor(randomGeneration.nextDouble() * this.topology.getNumberOfNodes());		//TODO: Após terminar se testa o simulador, colocar essa linha fora do loop do		
+                source = (int) Math.floor(randomGeneration.nextDouble() * this.topology.getNumberOfNodes());		//TODO: Após terminar de testa o simulador, colocar essa linha fora do loop do		
                 destination = (int) Math.floor(randomGeneration.nextDouble() * this.topology.getNumberOfNodes());				
             } while(source == destination);
 
@@ -214,6 +216,7 @@ public class Simulation {
             this.rsaManager.findRouteAndSlots(source, destination, callRequest);
             Route route = this.rsaManager.getRoute();
             List<Integer> fSlotsIndex = this.rsaManager.getSlotsIndex();
+            cyclesMSCL += this.rsaManager.getCyclesMSCL();
 
             if (route != null){
 
@@ -270,6 +273,7 @@ public class Simulation {
         simulationResults.setProbabilityBlocking(PB);
         simulationResults.setNumBlockBySlots(numBlockBySlots);
         simulationResults.setNumBlockByQoT(numBlockByQoT);
+        simulationResults.setMSCLCycle(cyclesMSCL);
 
         return simulationResults;
     }
@@ -284,7 +288,6 @@ public class Simulation {
 		this.topology.checkIfIsClean();
 
 		// Verifica se todas as rotas estão limpas
-        //FIXME: Constuir o código abaixo
-        //this.routesManager.checkIfIsClean();
+        this.routesManager.checkIfIsClean();
     } 
 }

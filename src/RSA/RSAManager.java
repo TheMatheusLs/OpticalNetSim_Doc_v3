@@ -43,7 +43,7 @@ public class RSAManager {
     /**
      * Armazena os ciclos MSCL
      */
-    private long cicleMSCL;
+    private long cycleMSCL;
 
     /**
      * Construtor da classe RSAManager
@@ -53,7 +53,7 @@ public class RSAManager {
     public RSAManager(RoutesManager routesManager) {
         this.routesManager = routesManager;
 
-        this.cicleMSCL = 0;
+        this.cycleMSCL = 0;
 
         this.route = null;
         this.fSlots = new ArrayList<Integer>();
@@ -93,6 +93,7 @@ public class RSAManager {
             }
             this.route = msclAlgorithm.getRoute();
             this.fSlots = msclAlgorithm.getSlotsIndex();
+            this.cycleMSCL = msclAlgorithm.getCyclesMSCL();
         }
 
         if (this.rsaOrderType == RSAOrderType.Routing_SA){
@@ -209,5 +210,14 @@ public class RSAManager {
      */
     public List<Integer> getSlotsIndex() {
         return this.fSlots;
+    }
+
+    /**
+     * Método para retornar o valor do Cycles MSCL
+     * 
+     * @return O conjunto dos slots encontrado
+     */
+    public long getCyclesMSCL() {
+        return this.cycleMSCL;
     }
 }

@@ -18,7 +18,7 @@ public class Runner {
         }
 
         // Cria a pasta para armazenar os resultados e as configurações da simulação
-        FolderManager folderManager = new FolderManager("Test");
+        FolderManager folderManager = new FolderManager("WORK");
 
         // Cria a simulação
         Simulation simulation = new Simulation(folderManager);

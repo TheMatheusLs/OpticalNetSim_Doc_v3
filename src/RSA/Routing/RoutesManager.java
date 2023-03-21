@@ -68,6 +68,28 @@ public class RoutesManager {
         //System.out.println(this);
     }
 
+    /**
+     * Verifica se todas as rotas foram liberadas corretamente.
+     * 
+     * @throws Exception
+     */
+    public void checkIfIsClean() throws Exception{
+
+        final int numSlotsPerLink = ParametersSimulation.getNumberOfSlotsPerLink();
+
+        for (List<Route> routes: this.allRoutes){
+            for (Route route : routes){
+                if (route != null){
+                    for (int i = 0; i < numSlotsPerLink;i++){
+                        if (route.getSlotValue(i) != 0){
+                            throw new Exception("As rotas não foram limpas corretamente");
+                        }
+                    }
+                }
+            }
+		}
+    }
+
     private void generateAllConflictRoutes(){
         System.out.print("Criando a lista de rotas conflitantes...");
 

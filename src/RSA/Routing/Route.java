@@ -50,6 +50,7 @@ public class Route {
      * Índice que a rota foi encontrada pelo algoritmo YEN
      */
     private int kFindIndex;
+
     /**
      * Lista que armazena a ocupação dos slots em todos os links da rota.
      */
@@ -103,6 +104,10 @@ public class Route {
 
         this.setCost(topology);
         this.kFindIndex = -1;
+    }
+
+    public int getkFindIndex() {
+        return kFindIndex;
     }
 
     public List<Route> getAllConflictRoutes() {
