@@ -22,8 +22,8 @@ public class ParametersSimulation{
 
     // Configura o número e as cargas para simulação
     final static double minLoadNetwork = 260;
-    final static double maxLoadNetwork = 260;
-    final static int numberOfPointsLoadNetwork = 1;
+    final static double maxLoadNetwork = 300;
+    final static int numberOfPointsLoadNetwork = 5;
     final static int numberOfSimulationsPerLoadNetwork = 1;
     
     // Seleciona a topologia da rede
@@ -37,20 +37,20 @@ public class ParametersSimulation{
     * Se for escolhido o algoritmo YEN ou Dijkstra é necessário escolher o tipo de ordem RSA entre "Routing_SA" ou "SA_Routing". Modificar a variável "rsaOrderType". E o algoritmo de alocação do espectro deve ser o "First-Fit" 
     * Se for escolhido o algoritmo "MSCLSequencial" ou "MSCLCombinado" o algoritmo de alocação do espectro deve ser o "MSLC" e o tipo de ordem deve ser atribuido "None".
     */
-    final static RoutingAlgorithmType routingAlgorithmType = RoutingAlgorithmType.MSCLSequencial;
+    final static RoutingAlgorithmType routingAlgorithmType = RoutingAlgorithmType.YEN;
     final static int kShortestRoutes = 1;
     final static KSortedRoutesByType kSortedRoutesByType = KSortedRoutesByType.None;
 
     
     // Algoritmo de alocação do espectro
-    final static SpectralAllocationAlgorithmType spectralAllocationAlgorithmType = SpectralAllocationAlgorithmType.MSCL;
+    final static SpectralAllocationAlgorithmType spectralAllocationAlgorithmType = SpectralAllocationAlgorithmType.FirstFit;
     /* Restrições:
      * O First Fit só pode ser usado quanto o algoritmo de roteamento for: YEN ou Djisktra
      * O MSCL só pode ser usado quanto o algoritmo de roteamento for: MSCL Sequencial ou MSCL Combinado
      */
     
     // Configurações Gerais
-    final static RSAOrderType rsaOrderType = RSAOrderType.None;
+    final static RSAOrderType rsaOrderType = RSAOrderType.Routing_SA;
     final static PhysicalLayerOption physicalLayerOption = PhysicalLayerOption.Disabled;
     final static int[] trafficOption = new int[]{100, 200, 400};
     final static LinkCostType linkCostType = LinkCostType.Hops;

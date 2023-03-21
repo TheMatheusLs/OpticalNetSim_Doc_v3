@@ -45,6 +45,9 @@ public class Simulation {
         this.seedsForLoad = this.generateRandomSeeds();
 
         this.inicialize();
+
+        // Salva o cabeçalho dos resultados
+        this.folderManager.writeResults(SimulationResults.csvHeader());
     }
 
     /**
@@ -152,7 +155,7 @@ public class Simulation {
                 System.out.println(simulationResults);
 
                 // Salva os resultados
-                this.folderManager.writeResults(simulationResults.toString());
+                this.folderManager.writeResults(simulationResults.csvToSave());
             }
         }
     }

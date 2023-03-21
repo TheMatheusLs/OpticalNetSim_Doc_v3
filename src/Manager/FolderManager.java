@@ -27,7 +27,7 @@ public class FolderManager {
         Date date = new Date();
         String dateTime = sdf.format(date);
 
-        this.folderName = dateTime + "_" + ParametersSimulation.getTopologyType() + "_" + ParametersSimulation.getRoutingAlgorithmType() + "_" + ParametersSimulation.getSpectralAllocationAlgorithmType() + "_" + ParametersSimulation.getRSAOrderType() + tagName;
+        this.folderName = dateTime + "_" + ParametersSimulation.getTopologyType() + "_" + ParametersSimulation.getRoutingAlgorithmType() + "_" + ParametersSimulation.getSpectralAllocationAlgorithmType() + "_" + ParametersSimulation.getRSAOrderType() + "_" + tagName;
 
         this.folderPath = ParametersSimulation.getPathToSaveResults() + this.folderName;
 
@@ -54,7 +54,7 @@ public class FolderManager {
         File file = new File(this.folderPath + "/" + fileName);
         try {
             file.createNewFile();
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(file, true);
             fileWriter.write(content);
             fileWriter.close();
         } catch (IOException e) {
@@ -74,6 +74,16 @@ public class FolderManager {
         "Tempo total de execução: " + totalTime + " milissegundos\n";
 
         this.writeFile("done.txt", content);
+
+        // Renomeia a pasta para facilitar a visualização
+
+        final File oldNameFile = new File(this.folderPath);
+        final File newNameFile = new File(this.folderPath + "_DONE");
+        oldNameFile.renameTo(newNameFile);
+
+        this.folderPath = this.folderPath + "_DONE";
+
+        System.out.println(this.folderPath);
     }
 
     /**

@@ -122,4 +122,12 @@ public class SimulationResults {
                 + ", \ncurrentRandomSeed=" + currentRandomSeed + ", \nnumBlockBySlots=" + numBlockBySlots
                 + ", \nnumBlockByQoT=" + numBlockByQoT + "\n\n";
     }
+
+    public static String csvHeader(){
+        return "nSim,networkLoad,probabilityBlocking,executionTime,MSCLCycle,currentRandomSeed,numBlockBySlots,numBlockByQoT\n";
+    }
+
+    public String csvToSave() {
+        return "" +nSim +","+ networkLoad +","+ probabilityBlocking +","+ executionTime +","+ MSCLCycle +","+ currentRandomSeed +","+ numBlockBySlots +","+ numBlockByQoT+ "\n";
+    }
 }
