@@ -37,6 +37,7 @@ public class Route {
      * Lista com todas os posíveis tamanhos de requisição para cada valor de bitrate para a maior modulação possível nessa rota
      */
     private int[] allReqSizes;
+
     /**
      * Lista com todas os posíveis valores de bitrate
      */
@@ -102,6 +103,14 @@ public class Route {
 
         this.setCost(topology);
         this.kFindIndex = -1;
+    }
+
+    public List<Route> getAllConflictRoutes() {
+        return this.allConflictRoutes;
+    }
+
+    public int[] getAllReqSizes() {
+        return this.allReqSizes;
     }
 
     public void setConflitList(List<Route> conflictRoutes){

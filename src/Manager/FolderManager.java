@@ -27,7 +27,7 @@ public class FolderManager {
         Date date = new Date();
         String dateTime = sdf.format(date);
 
-        this.folderName = dateTime + "_" + ParametersSimulation.getTopologyType() + "_" + "AlgRoute" + "_" + "AlgSpectrum" + "_" + tagName;
+        this.folderName = dateTime + "_" + ParametersSimulation.getTopologyType() + "_" + ParametersSimulation.getRoutingAlgorithmType() + "_" + ParametersSimulation.getSpectralAllocationAlgorithmType() + "_" + ParametersSimulation.getRSAOrderType() + tagName;
 
         this.folderPath = ParametersSimulation.getPathToSaveResults() + this.folderName;
 

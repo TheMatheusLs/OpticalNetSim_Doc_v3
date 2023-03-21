@@ -21,6 +21,10 @@ public class RSAManager {
      */
     private SpectrumAlgorithm spectrumAlgorithm;
     /**
+     * Tipo de algoritmo de alocação do espectro
+     */
+    private RoutingAlgorithmType routingOption;
+    /**
      * Classe de gerenciamento do Roteamento
      */
     private RoutesManager routesManager;
@@ -36,7 +40,10 @@ public class RSAManager {
      * Alocação do espectro em RSA ou SAR
      */
     private RSAOrderType rsaOrderType;
-
+    /**
+     * Armazena os ciclos MSCL
+     */
+    private long cicleMSCL;
 
     /**
      * Construtor da classe RSAManager
@@ -46,13 +53,15 @@ public class RSAManager {
     public RSAManager(RoutesManager routesManager) {
         this.routesManager = routesManager;
 
+        this.cicleMSCL = 0;
+
         this.route = null;
         this.fSlots = new ArrayList<Integer>();
 
         this.spectrumAlgorithm = null;
         rsaOrderType = ParametersSimulation.getRSAOrderType();
 
-        RoutingAlgorithmType routingOption = ParametersSimulation.getRoutingAlgorithmType();
+        this.routingOption = ParametersSimulation.getRoutingAlgorithmType();
         SpectralAllocationAlgorithmType spectrumOption = ParametersSimulation.getSpectralAllocationAlgorithmType();
 
         // Verifica se o Spectrum escolhido é o FF
@@ -72,7 +81,18 @@ public class RSAManager {
     public void findRouteAndSlots(int source, int destination, CallRequest callRequest) throws Exception {
         
         if (this.rsaOrderType == RSAOrderType.None){
-            
+            // Captura as rotas para o par origem destino
+            List<Route> routeSolution = this.routesManager.getRoutesForOD(source, destination);
+
+            MSCLAlgorithm msclAlgorithm = new MSCLAlgorithm();
+            if (routingOption == RoutingAlgorithmType.MSCLSequencial){
+                msclAlgorithm.findMSCLSequencial(routeSolution, callRequest);
+            }
+            if (routingOption == RoutingAlgorithmType.MSCLCombinado){
+                msclAlgorithm.findMSCLCombinado(routeSolution, callRequest);
+            }
+            this.route = msclAlgorithm.getRoute();
+            this.fSlots = msclAlgorithm.getSlotsIndex();
         }
 
         if (this.rsaOrderType == RSAOrderType.Routing_SA){

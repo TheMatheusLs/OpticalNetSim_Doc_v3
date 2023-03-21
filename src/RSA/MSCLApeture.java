@@ -50,8 +50,6 @@ public class MSCLApeture {
 
 		INDEX_SLOT:for(int indexSlot = emptySlots; indexSlot <= finalSlotToSearch; indexSlot++){
             
-            //this.cycles++;
-
             if (indexSlot == -1){
                 throw new Exception("Erro: emptySlots = -1");
             }
@@ -64,8 +62,6 @@ public class MSCLApeture {
 
 			// Para cada slot necessário para alocar a requisição;
 			EMPTY_SLOTS:for (emptySlots = indexSlot; emptySlots <= finalSlotToSearch; emptySlots++){
-
-                //this.cycles++;
 
 				if (route.getSlotValue(emptySlots) > 0){
                     break EMPTY_SLOTS;
